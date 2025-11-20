@@ -1,0 +1,42 @@
+[0.330s] Invoking command in '/home/moshi/ros2_ws/src/mypkg': CONDA_PROMPT_MODIFIER=(base) PYTHONPATH=/home/moshi/ros2_ws/src/mypkg/build/mypkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/moshi/ros2_ws/src/mypkg/install/mypkg/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/mypkg build --build-base /home/moshi/ros2_ws/src/mypkg/build/mypkg/build install --record /home/moshi/ros2_ws/src/mypkg/build/mypkg/install.log --single-version-externally-managed install_data
+[0.443s] running egg_info
+[0.443s] creating build/mypkg/mypkg.egg-info
+[0.443s] writing build/mypkg/mypkg.egg-info/PKG-INFO
+[0.444s] writing dependency_links to build/mypkg/mypkg.egg-info/dependency_links.txt
+[0.444s] writing entry points to build/mypkg/mypkg.egg-info/entry_points.txt
+[0.444s] writing requirements to build/mypkg/mypkg.egg-info/requires.txt
+[0.444s] writing top-level names to build/mypkg/mypkg.egg-info/top_level.txt
+[0.444s] writing manifest file 'build/mypkg/mypkg.egg-info/SOURCES.txt'
+[0.445s] reading manifest file 'build/mypkg/mypkg.egg-info/SOURCES.txt'
+[0.445s] writing manifest file 'build/mypkg/mypkg.egg-info/SOURCES.txt'
+[0.445s] running build
+[0.445s] running build_py
+[0.446s] creating /home/moshi/ros2_ws/src/mypkg/build/mypkg/build
+[0.446s] creating /home/moshi/ros2_ws/src/mypkg/build/mypkg/build/lib
+[0.446s] creating /home/moshi/ros2_ws/src/mypkg/build/mypkg/build/lib/mypkg
+[0.446s] copying mypkg/__init__.py -> /home/moshi/ros2_ws/src/mypkg/build/mypkg/build/lib/mypkg
+[0.446s] copying mypkg/listener.py -> /home/moshi/ros2_ws/src/mypkg/build/mypkg/build/lib/mypkg
+[0.446s] copying mypkg/talker.py -> /home/moshi/ros2_ws/src/mypkg/build/mypkg/build/lib/mypkg
+[0.446s] running install
+[0.447s] running install_lib
+[0.447s] creating /home/moshi/ros2_ws/src/mypkg/install/mypkg/lib/python3.10/site-packages/mypkg
+[0.447s] copying /home/moshi/ros2_ws/src/mypkg/build/mypkg/build/lib/mypkg/__init__.py -> /home/moshi/ros2_ws/src/mypkg/install/mypkg/lib/python3.10/site-packages/mypkg
+[0.447s] copying /home/moshi/ros2_ws/src/mypkg/build/mypkg/build/lib/mypkg/listener.py -> /home/moshi/ros2_ws/src/mypkg/install/mypkg/lib/python3.10/site-packages/mypkg
+[0.447s] copying /home/moshi/ros2_ws/src/mypkg/build/mypkg/build/lib/mypkg/talker.py -> /home/moshi/ros2_ws/src/mypkg/install/mypkg/lib/python3.10/site-packages/mypkg
+[0.448s] byte-compiling /home/moshi/ros2_ws/src/mypkg/install/mypkg/lib/python3.10/site-packages/mypkg/__init__.py to __init__.cpython-310.pyc
+[0.449s] byte-compiling /home/moshi/ros2_ws/src/mypkg/install/mypkg/lib/python3.10/site-packages/mypkg/listener.py to listener.cpython-310.pyc
+[0.449s] byte-compiling /home/moshi/ros2_ws/src/mypkg/install/mypkg/lib/python3.10/site-packages/mypkg/talker.py to talker.cpython-310.pyc
+[0.449s] running install_data
+[0.449s] Sorry: IndentationError: unexpected indent (listener.py, line 8)
+[0.449s] creating /home/moshi/ros2_ws/src/mypkg/install/mypkg/share/ament_index
+[0.449s] creating /home/moshi/ros2_ws/src/mypkg/install/mypkg/share/ament_index/resource_index
+[0.449s] creating /home/moshi/ros2_ws/src/mypkg/install/mypkg/share/ament_index/resource_index/packages
+[0.449s] copying resource/mypkg -> /home/moshi/ros2_ws/src/mypkg/install/mypkg/share/ament_index/resource_index/packages
+[0.449s] copying package.xml -> /home/moshi/ros2_ws/src/mypkg/install/mypkg/share/mypkg
+[0.449s] running install_egg_info
+[0.450s] Copying build/mypkg/mypkg.egg-info to /home/moshi/ros2_ws/src/mypkg/install/mypkg/lib/python3.10/site-packages/mypkg-0.0.0-py3.10.egg-info
+[0.451s] running install_scripts
+[0.464s] Installing listener script to /home/moshi/ros2_ws/src/mypkg/install/mypkg/lib/mypkg
+[0.464s] Installing talker script to /home/moshi/ros2_ws/src/mypkg/install/mypkg/lib/mypkg
+[0.464s] writing list of installed files to '/home/moshi/ros2_ws/src/mypkg/build/mypkg/install.log'
+[0.478s] Invoked command in '/home/moshi/ros2_ws/src/mypkg' returned '0': CONDA_PROMPT_MODIFIER=(base) PYTHONPATH=/home/moshi/ros2_ws/src/mypkg/build/mypkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/moshi/ros2_ws/src/mypkg/install/mypkg/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/mypkg build --build-base /home/moshi/ros2_ws/src/mypkg/build/mypkg/build install --record /home/moshi/ros2_ws/src/mypkg/build/mypkg/install.log --single-version-externally-managed install_data
