@@ -148,17 +148,29 @@ else
 fi
 
 #######################################
-# GMST / LST 論理整合性
+# GMST / LST 論理整合性（bc 不使用）
 #######################################
+
 gmst_hours=$(echo "$gmst2" | awk -F: '{print $1 + $2/60 + $3/3600}')
 lst_hours=$(echo "$lst2" | awk -F: '{print $1 + $2/60 + $3/3600}')
-expected_lst=$(echo "($gmst_hours + $TOKYO_LONGITUDE/15.0) % 24" | bc -l)
 
-diff=$(echo "$lst_hours - $expected_lst" | bc -l)
-diff_abs=$(echo "$diff" | awk '{if($1<0){print -$1}else{print $1}}')
+expected_lst=$(awk -v g="$gmst_hours" -v lon="$TOKYO_LONGITUDE" '
+BEGIN {
+    lst = g + lon / 15.0
+    while (lst < 0)  lst += 24
+    while (lst >= 24) lst -= 24
+    print lst
+}')
 
-# 許容誤差：0.02h ≒ 72秒
-if (( $(echo "$diff_abs < 0.02" | bc -l) )); then
+diff_abs=$(awk -v a="$lst_hours" -v b="$expected_lst" '
+BEGIN {
+    d = a - b
+    if (d < 0) d = -d
+    print d
+}')
+
+# 許容誤差：0.02 時間（約72秒）
+if awk -v d="$diff_abs" 'BEGIN { exit !(d < 0.02) }'; then
     echo "LST vs GMST logical check: OK"
 else
     echo "LST vs GMST logical check: ERROR"
