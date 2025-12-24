@@ -1,31 +1,20 @@
+#!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2025 Motona Shigehisa
+# SPDX-License-Identifier: BSD-3-Clause
+
 import rclpy
 from rclpy.node import Node
-from person_msgs.srv import Query
+from std_msgs.msg import String
 
 rclpy.init()
 node = Node("listener")
 
 
+def cb(msg):
+    node.get_logger().info("\n" + msg.data)
+
+
 def main():
-    client = node.create_client(Query, 'query')
-    while not client.wait_for_service(timeout_sec=1.0):
-        node.get_logger().info('待機中')
+    node.create_subscription(String, "time", cb, 10)
+    rclpy.spin(node)
 
-    req = Query.Request()
-    req.name = "重久心那"
-    future = client.call_async(req)
-
-    while rclpy.ok():
-        rclpy.spin_once(node)
-        if future.done():
-            try:
-                response = future.result()
-            except:
-                node.get_logger().info('呼び出し失敗')
-            else:
-                node.get_logger().info("age: {}".format(response.age))
-
-            break
-
-    node.destroy_node()
-    rclpy.shutdown()

@@ -18,7 +18,7 @@ setup(
     zip_safe=True,
     maintainer='moshi',
     maintainer_email='mo@bluebird.com',
-    description='ロボットシステム学',
+    description='UTCからユリウス日・恒星時を計算するROS 2パッケージ',
     license='BSD-3-Clause',
     extras_require={
         'test': [
@@ -27,7 +27,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'talker = mypkg.talker:main', 
+            'talker = mypkg.talker:main',
             'listener = mypkg.listener:main',
         ],
     },
