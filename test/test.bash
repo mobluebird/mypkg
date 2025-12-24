@@ -2,9 +2,9 @@
 # SPDX-FileCopyrightText: 2025 Motona Shigehisa
 # SPDX-License-Identifier: BSD-3-Clause
 #
-# mypkg 4トピック統合テスト（CI安定版）
+# mypkg 4トピック統合テスト（CI安定・QoS対応版）
 
-set -eo pipefail   # set -u は使わない（ROS非対応）
+set -eo pipefail   # ROS2は set -u 非対応
 
 #######################################
 # 設定
@@ -15,21 +15,30 @@ DIR=~
 ROS_DISTRO=humble
 LOG_FILE="/tmp/mypkg.log"
 TOKYO_LONGITUDE=139.6917
-
-TOPICS=("utc_time" "julian_day" "gmst" "lst")
 FAIL=0
 
+TOPICS=("utc_time" "julian_day" "gmst" "lst")
+
 #######################################
-# 安全な topic 取得（retry 付き）
+# QoS指定 + retry 付き topic 取得
 #######################################
 get_topic_once () {
     local topic="$1"
     local out=""
+    local data=""
 
-    for i in {1..10}; do
-        out=$(ros2 topic echo -n 1 "/$topic" 2>/dev/null || true)
-        if [ -n "$out" ]; then
-            echo "$out"
+    for i in {1..15}; do
+        out=$(ros2 topic echo \
+            --once \
+            --qos-reliability best_effort \
+            --qos-durability volatile \
+            "/$topic" 2>/dev/null || true)
+
+        # std_msgs/String の data: を剥がす
+        data=$(echo "$out" | sed -n 's/^data:[[:space:]]*//p')
+
+        if [ -n "$data" ]; then
+            echo "$data"
             return 0
         fi
         sleep 0.5
@@ -47,21 +56,16 @@ cd "$DIR/ros2_ws" || {
     exit 1
 }
 
-# ROS 2 環境（CIで安全）
 source /opt/ros/$ROS_DISTRO/setup.bash
-
-# ビルド
 colcon build --symlink-install
 source install/setup.bash
 
 #######################################
-# Launch 起動
+# launch 起動
 #######################################
-timeout 15 ros2 launch mypkg talk_listen.launch.py > "$LOG_FILE" 2>&1 &
+timeout 20 ros2 launch mypkg talk_listen.launch.py > "$LOG_FILE" 2>&1 &
 LAUNCH_PID=$!
-
-# ノード起動待ち（CIは遅い）
-sleep 4
+sleep 5   # CIは遅い
 
 #######################################
 # トピック存在確認（retry）
@@ -84,7 +88,7 @@ for t in "${TOPICS[@]}"; do
 done
 
 #######################################
-# 初回メッセージ取得
+# メッセージ形式チェック
 #######################################
 echo "=== メッセージ形式チェック ==="
 utc1=$(get_topic_once utc_time)
@@ -93,7 +97,7 @@ gmst1=$(get_topic_once gmst)
 lst1=$(get_topic_once lst)
 
 if [ -z "$utc1" ] || [ -z "$jd1" ] || [ -z "$gmst1" ] || [ -z "$lst1" ]; then
-    echo "ERROR: 初回メッセージを取得できません"
+    echo "ERROR: 初回メッセージ取得失敗"
     FAIL=1
 fi
 
@@ -103,7 +107,7 @@ if ! [[ $utc1 =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}T ]]; then
     FAIL=1
 fi
 
-# JD 小数点5桁以上
+# JD（小数点5桁以上）
 if ! [[ $jd1 =~ ^[0-9]+\.[0-9]{5,} ]]; then
     echo "JD format ERROR: $jd1"
     FAIL=1
@@ -119,9 +123,9 @@ for name in gmst lst; do
 done
 
 #######################################
-# 時間変化確認
+# 時間変化チェック
 #######################################
-echo "=== 時間変化確認 ==="
+echo "=== 時間変化チェック ==="
 sleep 1.5
 
 utc2=$(get_topic_once utc_time)
@@ -129,7 +133,6 @@ jd2=$(get_topic_once julian_day)
 gmst2=$(get_topic_once gmst)
 lst2=$(get_topic_once lst)
 
-# UTC 変化
 if [ "$utc1" != "$utc2" ]; then
     echo "UTC changes over time: OK"
 else
@@ -137,7 +140,6 @@ else
     FAIL=1
 fi
 
-# JD 増加
 if (( $(echo "$jd2 > $jd1" | bc -l) )); then
     echo "JD increases: OK"
 else
@@ -155,7 +157,7 @@ expected_lst=$(echo "($gmst_hours + $TOKYO_LONGITUDE/15.0) % 24" | bc -l)
 diff=$(echo "$lst_hours - $expected_lst" | bc -l)
 diff_abs=$(echo "$diff" | awk '{if($1<0){print -$1}else{print $1}}')
 
-# 許容誤差：0.02時間 ≒ 72秒
+# 許容誤差：0.02h ≒ 72秒
 if (( $(echo "$diff_abs < 0.02" | bc -l) )); then
     echo "LST vs GMST logical check: OK"
 else
