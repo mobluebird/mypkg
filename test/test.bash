@@ -23,18 +23,20 @@ get_topic_once() {
   local topic="$1"
   local out data
 
-  for _ in {1..15}; do
-    out=$(ros2 topic echo --once --qos-reliability best_effort --qos-durability volatile "/$topic" 2>/dev/null || true)
-    data=$(echo "$out" | sed -n 's/^data:[[:space:]]*//p')
-    if [ -n "$data" ]; then
-      strip_quotes "$data"
-      return 0
-    fi
-    sleep 0.3
-  done
+  out=$(timeout 3 ros2 topic echo -n 1 \
+    --qos-reliability best_effort \
+    --qos-durability volatile \
+    "/$topic" 2>/dev/null || true)
+
+  data=$(echo "$out" | sed -n 's/^data:[[:space:]]*//p')
+
+  if [ -n "$data" ]; then
+    echo "$data" | sed "s/^'//; s/'$//"
+    return 0
+  fi
+
   return 1
 }
-
 #######################################
 # launch
 #######################################
