@@ -2,9 +2,8 @@
 [![test](https://github.com/mobluebird/mypkg/actions/workflows/test.yml/badge.svg)](https://github.com/mobluebird/mypkg/actions/workflows/test.yml)
 ![Python](https://img.shields.io/badge/Python-3.7--3.14-blue)
 ![License](https://img.shields.io/badge/License-BSD--3--Clause-green.svg)
-![ROS 2 Humble](https://img.shields.io/badge/ROS2-Humble-blue)
-![ROS 2](https://img.shields.io/badge/ROS2-Humble%20/%20Iron-blue)
-本パッケージは、UTC 時刻から **JD（ユリウス日）・GMST（恒星時）・LST（地方恒星時）** を計算し、それぞれ独立した ROS 2 トピックで配信するものです。  
+
+本パッケージは、UTC（協定世界時）から **JD（ユリウス日）・GMST（恒星時）・LST（地方恒星時）** を計算し、それぞれ独立した ROS 2 トピックで配信するものです。  
 4つのトピックに分けることで、必要な情報だけを個別に受信可能です。
 ## ノードの説明
 ### talker
@@ -36,8 +35,8 @@
 |------------------|-------------------|------------------------------|
 | `/utc_time`      | `std_msgs/String` | UTC 時刻文字列               |
 | `/julian_day`    | `std_msgs/String` | ユリウス日（JD）             |
-| `/gmst`          | `std_msgs/String` | グリニッジ恒星時             |
-| `/lst`           | `std_msgs/String` | 東京地方恒星時（LST）        |
+| `/gmst`          | `std_msgs/String` | 恒星時（GMST）             　|
+| `/lst`           | `std_msgs/String` | 東京の地方恒星時（LST）      |
 
 ## リポジトリの使用方法
 ターミナルで以下のコマンドを実行します。
@@ -49,7 +48,7 @@ $ colcon build
 ```
 
 ## 実行方法
-- UTC, JD, GMST, LST をまとめて表示する場合
+### UTC, JD, GMST, LST をまとめて表示する場合
 以下のコマンドで実行可能です。
 ```
 $ ros2 launch mypkg talk_listen.launch.py
@@ -62,13 +61,8 @@ $ ros2 launch mypkg talk_listen.launch.py
 [listener-2] JD  : 2461033.79350
 [listener-2] GMST: 06:12:15.59
 [listener-2] LST (Tokyo): 15:31:01.60
-[listener-2] [INFO] [1766559760.137395127] [listener]:
-[listener-2] UTC : 2025-12-24T07:02:39.141609+00:00
-[listener-2] JD  : 2461033.79351
-[listener-2] GMST: 06:12:15.59
-[listener-2] LST (Tokyo): 15:31:01.60
 ```
-- 個別に表示する場合
+### 個別に表示する場合
 talkerを起動する。
 ```
 $ ros2 run mypkg talker
@@ -78,27 +72,19 @@ $ ros2 run mypkg talker
 $ ros2 topic echo /utc_time
 data: '2025-12-24T07:01:36.242501+00:00'
 ---
-data: '2025-12-24T07:01:37.242479+00:00'
----
 ```
 ```
 $ ros2 topic echo /julian_day
 data: '2461033.79293'
----
-data: '2461033.79294'
 ---
 ```
 ```
 $ ros2 topic echo /gmst
 data: '06:12:15.47'
 ---
-data: '06:12:15.48'
----
 ```
 ```
 $ ros2 topic echo /lst
-data: '15:31:01.51'
----
 data: '15:31:01.51'
 ---
 ```
@@ -110,10 +96,10 @@ data: '15:31:01.51'
 
 ## 謝辞
 - Web記事・資料
-  - [GMST（グリニッジ恒星時）・恒星時の考え方（計算式の理論参考）](https://zh.wikipedia.org/wiki/恆星時)
-  - [NIES Astro Document：Python でユリウス日と恒星時を計算する例](https://www.nies.ch/doc/astro/sternzeit.en.php)
-  - [Julian Day Numbers](https://quasar.as.utexas.edu/BillInfo/JulianDatesG.html)
   - [タイムゾーンとは？](https://it-infomation.com/time-zone/)
+  - [Julian Day Numbers](https://quasar.as.utexas.edu/BillInfo/JulianDatesG.html)
+  - [NIES Astro Document：Python でユリウス日と恒星時を計算する>例](https://www.nies.ch/doc/astro/sternzeit.en.php)
+  - [GMST・恒星時の考え方（計算式の理論参考）](https://zh.wikipedia.org/wiki/恆星時)
   - [恒星時 (Sidereal Time)](https://eco.mtk.nao.ac.jp/koyomi/wiki/B9B1C0B1BBFE.html)
 - 利用・参照したコード
   - このパッケージのコードの一部は，下記のスライド（CC-BY-SA 4.0 by Ryuichi Ueda）のものを，本人の許可を得て自身の著作としたものです。
