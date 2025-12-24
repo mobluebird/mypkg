@@ -2,6 +2,7 @@
 [![test](https://github.com/mobluebird/mypkg/actions/workflows/test.yml/badge.svg)](https://github.com/mobluebird/mypkg/actions/workflows/test.yml)
 ![Python](https://img.shields.io/badge/Python-3.7--3.14-blue)
 ![License](https://img.shields.io/badge/License-BSD--3--Clause-green.svg)
+![ROS 2 Humble](https://img.shields.io/badge/ROS2-Humble-orange)
 
 本パッケージは、UTC（協定世界時）から **JD（ユリウス日）・GMST（恒星時）・LST（地方恒星時）** を計算し、それぞれ独立した ROS 2 トピックで配信するものです。  
 4つのトピックに分けることで、必要な情報だけを個別に受信可能です。
