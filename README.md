@@ -49,7 +49,7 @@ $ colcon build
 
 ## 実行方法
 ### UTC, JD, GMST, LST をまとめて表示する場合
-以下のコマンドで実行可能です。
+- 以下のコマンドで実行可能です。
 ```
 $ ros2 launch mypkg talk_listen.launch.py
 [INFO] [launch]: All log files can be found below /home/moshi/.ros/log/2025-12-24-16-02-37-800976-pR-310738
@@ -63,11 +63,11 @@ $ ros2 launch mypkg talk_listen.launch.py
 [listener-2] LST (Tokyo): 15:31:01.60
 ```
 ### 個別に表示する場合
-talkerを起動する。
+- talkerを起動する。
 ```
 $ ros2 run mypkg talker
 ```
-別端末で各トピックを確認する。
+- 別端末で各トピックを確認する。
 ```
 $ ros2 topic echo /utc_time
 data: '2025-12-24T07:01:36.242501+00:00'
