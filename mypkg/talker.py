@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3 
 # SPDX-FileCopyrightText: 2025 Motona Shigehisa
 # SPDX-License-Identifier: BSD-3-Clause
 
@@ -15,30 +15,40 @@ from mypkg.time_utils import (
 
 rclpy.init()
 node = Node("talker")
-pub = node.create_publisher(String, "time", 10)
+
+pub_utc = node.create_publisher(String, "utc_time", 10)
+pub_jd = node.create_publisher(String, "julian_day", 10)
+pub_gmst = node.create_publisher(String, "gmst", 10)
+pub_lst = node.create_publisher(String, "lst", 10)
 
 TOKYO_LONGITUDE = 139.6917
 
 
 def cb():
     now_utc = datetime.now(timezone.utc)
-
     jd = utc_to_jd(now_utc)
     gmst = jd_to_gmst(jd)
     lst = gmst_to_lst(gmst, TOKYO_LONGITUDE)
 
-    msg = String()
-    msg.data = (
-        f"UTC : {now_utc.isoformat()}\n"
-        f"JD  : {jd:.5f}\n"
-        f"GMST: {hours_to_hms(gmst)}\n"
-        f"LST (Tokyo): {hours_to_hms(lst)}"
-    )
+    msg_utc = String()
+    msg_utc.data = now_utc.isoformat()
+    pub_utc.publish(msg_utc)
 
-    pub.publish(msg)
+    msg_jd = String()
+    msg_jd.data = f"{jd:.5f}"
+    pub_jd.publish(msg_jd)
+
+    msg_gmst = String()
+    msg_gmst.data = hours_to_hms(gmst)
+    pub_gmst.publish(msg_gmst)
+
+    msg_lst = String()
+    msg_lst.data = hours_to_hms(lst)
+    pub_lst.publish(msg_lst)
 
 
 def main():
     node.create_timer(1.0, cb)
     rclpy.spin(node)
+
 
