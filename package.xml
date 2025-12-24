@@ -3,7 +3,7 @@
 <package format="3">
   <name>mypkg</name>
   <version>0.0.0</version>
-  <description>UTCからユリウス日・恒星時を計算するROS 2パッケージ</description>
+  <description>UTC 変換 ROS 2 パッケージ</description>
   <maintainer email="mo@bluebird.com">moshi</maintainer>
   <license>BSD-3-Clause</license>
   <buildtool_depend>ament_python</buildtool_depend>

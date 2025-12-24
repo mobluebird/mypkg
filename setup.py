@@ -18,7 +18,7 @@ setup(
     zip_safe=True,
     maintainer='moshi',
     maintainer_email='mo@bluebird.com',
-    description='UTCからユリウス日・恒星時を計算するROS 2パッケージ',
+    description='UTC 変換 ROS 2 パッケージ',
     license='BSD-3-Clause',
     extras_require={
         'test': [
