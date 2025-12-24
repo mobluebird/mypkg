@@ -1,32 +1,25 @@
-# UTC から JD・GMST・LST に変換する ROS 2 パッケージ
+# UTC 変換 ROS 2 パッケージ
 [![test](https://github.com/mobluebird/mypkg/actions/workflows/test.yml/badge.svg)](https://github.com/mobluebird/mypkg/actions/workflows/test.yml)
 ![Python](https://img.shields.io/badge/Python-3.7--3.14-blue)
 ![License](https://img.shields.io/badge/License-BSD--3--Clause-green.svg)
 
 本パッケージは、UTC（協定世界時）から **JD（ユリウス日）・GMST（恒星時）・LST（地方恒星時）** を計算し、それぞれ独立した ROS 2 トピックで配信するものです。  
 4つのトピックに分けることで、必要な情報だけを個別に受信可能です。
+
 ## ノードの説明
 ### talker
 - 役割: UTC を取得し、JD・GMST・LST に変換して各トピックにパブリッシュする
 - ノード名: `talker`
-- パブリッシュするトピック:
-  - `/utc_time`  
-  - `/julian_day`  
-  - `/gmst`  
-  - `/lst`
+- パブリッシュするトピック: `/utc_time`, `/julian_day`, `/gmst`, `/lst`
 - 更新間隔: 1 秒
 ### listener
 - 役割: 各トピックを受信して画面に表示する
 - ノード名: `listener`
-- サブスクライブするトピック:
-  - `/utc_time`  
-  - `/julian_day`  
-  - `/gmst`  
-  - `/lst`
+- サブスクライブするトピック: `/utc_time`, `/julian_day`, `/gmst`, `/lst`
 - 表示内容: UTC、JD、GMST、LST（Tokyo）
 
 ## Python モジュールの説明
-### time_utils
+### time_utils.py
 - 役割: UTC → JD → GMST → LST への計算関数を提供
 - 利用: `talker` で呼び出される
 
