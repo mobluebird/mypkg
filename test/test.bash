@@ -10,8 +10,13 @@ colcon build
 source $dir/.bashrc
 timeout 20 ros2 launch mypkg talk_listen.launch.py > /tmp/mypkg.log
 
-grep -q 'UTC'  /tmp/mypkg.log
-grep -q 'JD'   /tmp/mypkg.log
-grep -q 'GMST' /tmp/mypkg.log
-grep -q 'LST'  /tmp/mypkg.log
+#grep -q 'UTC'  /tmp/mypkg.log
+#grep -q 'JD'   /tmp/mypkg.log
+#grep -q 'GMST' /tmp/mypkg.log
+#grep -q 'LST'  /tmp/mypkg.log
+
+grep -q 'UTC *:' "$log"
+grep -q 'JD  *:' "$log"
+grep -q 'GMST *:' "$log"
+grep -q 'LST *(Tokyo):' "$log"
 
