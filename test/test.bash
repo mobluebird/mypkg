@@ -10,14 +10,26 @@ colcon build
 source $dir/.bashrc
 
 # talker 
-timeout 20 ros2 run mypkg talker > /tmp/talker.log &
+timeout 20 ros2 run mypkg talker > /tmp/talker.log 2> /tmp/talker.err &
 sleep 3
 ros2 topic echo --once /utc_time > /tmp/utc.log
 grep -q 'data:' /tmp/utc.log
 pkill -f 'ros2 run mypkg talker' || true
+sleep 1
 
 # launch
-timeout 20 ros2 launch mypkg talk_listen.launch.py > /tmp/mypkg.log
+#timeout 20 ros2 launch mypkg talk_listen.launch.py > /tmp/mypkg.log
+
+timeout 20 ros2 launch mypkg talk_listen.launch.py \
+  > /tmp/mypkg.log 2> /tmp/mypkg.err &
+
+sleep 2
+
+for i in {1..5}; do
+  ros2 topic list | grep -q '^/utc_time$' && break
+  sleep 1
+done
+ros2 topic list | grep -q '^/utc_time$'
 
 # topic 存在確認
 ros2 topic list | grep -q '^/utc_time$'
@@ -42,3 +54,6 @@ grep -q 'JD  :'  /tmp/mypkg.log
 grep -q 'GMST:'  /tmp/mypkg.log
 grep -q 'LST (Tokyo):' /tmp/mypkg.log
 
+# 異常終了なし
+! grep -i 'error' /tmp/mypkg.err
+! grep -i 'warn'  /tmp/mypkg.err
