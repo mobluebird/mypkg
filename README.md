@@ -5,6 +5,14 @@
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
 ![ROS 2 Humble](https://img.shields.io/badge/ROS2-Humble-purple)
 
+# My ROS 2 Package
+
+[![Test](https://github.com/mobluebird/mypkg/actions/workflows/test.yml/badge.svg)](https://github.com/mobluebird/mypkg/actions/workflows/test.yml) 
+<img src="https://img.shields.io/badge/-License-BSD--3--Clause-blue?logo=open-source-initiative&style=flat"> 
+<img src="https://img.shields.io/badge/-Ubuntu-22.04-E95420?logo=ubuntu&style=flat"> 
+<img src="https://img.shields.io/badge/-Python-3.10-F9DC3E?logo=python&style=flat"> 
+<img src="https://img.shields.io/badge/-ROS2-Humble-3399FF?logo=ros&style=flat">
+
 本パッケージは、UTC（協定世界時）から **JD（ユリウス日）・GMST（恒星時）・LST（地方恒星時）** を計算し、それぞれ独立した ROS 2 トピックで配信するものです。  
 4つのトピックに分けることで、必要な情報だけを個別に受信可能です。
 
