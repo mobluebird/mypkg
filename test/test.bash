@@ -18,13 +18,9 @@ pkill -f 'ros2 run mypkg talker' || true
 sleep 1
 
 # launch
-#timeout 20 ros2 launch mypkg talk_listen.launch.py > /tmp/mypkg.log
-
 timeout 20 ros2 launch mypkg talk_listen.launch.py \
   > /tmp/mypkg.log 2> /tmp/mypkg.err &
-
 sleep 2
-
 for i in {1..5}; do
   ros2 topic list | grep -q '^/utc_time$' && break
   sleep 1
