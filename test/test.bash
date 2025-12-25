@@ -11,10 +11,15 @@ source $dir/.bashrc
 
 timeout 20 ros2 launch mypkg talk_listen.launch.py > /tmp/mypkg.log
 
-grep -q '\[listener'  /tmp/mypkg.log
-grep -q 'UTC'  /tmp/mypkg.log
-grep -q 'JD'   /tmp/mypkg.log
-grep -q 'GMST' /tmp/mypkg.log
-grep -q 'LST'  /tmp/mypkg.log
+#grep -q '\[listener'  /tmp/mypkg.log
+#grep -q 'UTC'  /tmp/mypkg.log
+#grep -q 'JD'   /tmp/mypkg.log
+#grep -q 'GMST' /tmp/mypkg.log
+#grep -q 'LST'  /tmp/mypkg.log
 
+grep -q '\[listener' /tmp/mypkg.log
+grep -q 'UTC :'  /tmp/mypkg.log
+grep -q 'JD  :'  /tmp/mypkg.log
+grep -q 'GMST:'  /tmp/mypkg.log
+grep -q 'LST (Tokyo):' /tmp/mypkg.log
 
