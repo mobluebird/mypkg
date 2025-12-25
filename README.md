@@ -1,9 +1,8 @@
 # UTC 変換 ROS 2 パッケージ
 [![test](https://github.com/mobluebird/mypkg/actions/workflows/test.yml/badge.svg)](https://github.com/mobluebird/mypkg/actions/workflows/test.yml)
-![License](https://img.shields.io/badge/License-BSD--3--Clause-green.svg)
-![Ubuntu 22.04](https://img.shields.io/badge/Ubuntu-22.04-orange.svg)
-![Python](https://img.shields.io/badge/Python-3.10-yellow.svg)
-![ROS 2 Humble Hawksbill](https://img.shields.io/badge/ROS 2 Humble Hawksbill-blue.svg)
+![License](https://img.shields.io/badge/License-BSD-3--Clause-lightgrey?style=flat&logo=opensourceinitiative&logoColor=black)
+![Ubuntu 22.04](https://img.shields.io/badge/Ubuntu-22.04-E95420?style=flat&logo=ubuntu&logoColor=white)
+![Python 3.10](https://img.shields.io/badge/Python-3.10-F9DC3E?style=flat&logo=python&logoColor=blue)
 ![ROS2 Humble](https://img.shields.io/badge/ROS2-Humble-3399FF?style=flat&logo=ros)
 
 本パッケージは、UTC（協定世界時）から **JD（ユリウス日）・GMST（恒星時）・LST（地方恒星時）** を計算し、それぞれ独立した ROS 2 トピックで配信するものです。  
