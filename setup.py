@@ -18,7 +18,7 @@ setup(
     zip_safe=True,
     maintainer='moshi',
     maintainer_email='mo@bluebird.com',
-    description='UTC 変換 ROS 2 パッケージ',
+    description='天文時間計算・配信 ROS 2 パッケージ',
     license='BSD-3-Clause',
     extras_require={
         'test': [

@@ -3,7 +3,7 @@
 <package format="3">
   <name>mypkg</name>
   <version>0.0.0</version>
-  <description>UTC 変換 ROS 2 パッケージ</description>
+  <description>天文時間計算・配信 ROS 2 パッケージ</description>
   <maintainer email="mo@bluebird.com">moshi</maintainer>
   <license>BSD-3-Clause</license>
   <buildtool_depend>ament_python</buildtool_depend>
