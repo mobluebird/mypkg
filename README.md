@@ -1,41 +1,41 @@
-# UTC 変換 ROS 2 パッケージ
+# 天文時間計算・配信 ROS 2 パッケージ
 [![test](https://github.com/mobluebird/mypkg/actions/workflows/test.yml/badge.svg)](https://github.com/mobluebird/mypkg/actions/workflows/test.yml)
 ![License](https://img.shields.io/badge/License-BSD--3--Clause-green.svg)
 ![Ubuntu 22.04](https://img.shields.io/badge/Ubuntu-22.04-E95420?style=flat&logo=ubuntu&logoColor=white)
 ![Python 3.10](https://img.shields.io/badge/Python-3.10-F9DC3E?style=flat&logo=python&logoColor=blue)
 ![ROS2 Humble](https://img.shields.io/badge/ROS2-Humble-3399FF?style=flat&logo=ros)
 
-本パッケージは、UTC（協定世界時）から **JD（ユリウス日）・GMST（恒星時）・LST（地方恒星時）** を計算し、それぞれ独立した ROS 2 トピックで配信するものです。  
-4つのトピックに分けることで、必要な情報だけを個別に受信可能です。
+本パッケージは、現在の**UTC（協定世界時）**を取得し、天文時間である**JD（ユリウス日）・GMST（恒星時）・LST（地方恒星時・東京）**の情報を計算してROS 2 トピックで配信します。
+各情報は独立したトピックで配信されるため、必要な情報だけを個別に受信することができます。
 
 ## ノードの説明
 ### talker
-- 役割: UTC を取得し、JD・GMST・LST に変換して各トピックにパブリッシュする
+- 役割: UTC を取得し、JD・GMST・LST に変換して各トピックにパブリッシュします
 - ノード名: `talker`
-- パブリッシュするトピック: `/utc_time`, `/julian_day`, `/gmst`, `/lst`
+- パブリッシュするトピック: `/utc_time`、`/julian_day`、`/gmst`、`/lst`
 - 更新間隔: 1 秒
 ### listener
-- 役割: 各トピックを受信して画面に表示する
+- 役割: 各トピックを受信して画面に表示します
 - ノード名: `listener`
-- サブスクライブするトピック: `/utc_time`, `/julian_day`, `/gmst`, `/lst`
+- サブスクライブするトピック: `/utc_time`、`/julian_day`、`/gmst`、`/lst`
 - 表示内容: UTC、JD、GMST、LST（Tokyo）
 
 ## Python モジュールの説明
 ### time_utils.py
-- 役割: UTC → JD → GMST → LST への計算関数を提供
-- 利用: `talker` で呼び出される
+- 役割: UTC → JD → GMST → LST への計算関数を提供します
+- 利用: `talker` で呼び出されます
 
 ## トピックの説明
 | トピック名       | メッセージ型      | 内容                         |
 |------------------|-------------------|------------------------------|
-| `/utc_time`      | `std_msgs/String` | UTC 時刻文字列               |
-| `/julian_day`    | `std_msgs/String` | ユリウス日（JD）             |
-| `/gmst`          | `std_msgs/String` | 恒星時（GMST）             　|
-| `/lst`           | `std_msgs/String` | 東京の地方恒星時（LST）      |
+| `/utc_time`      | `std_msgs/String` | 現在の協定世界時（UTC）を ISO 8601 形式で文字列配信   |
+| `/julian_day`    | `std_msgs/String` | UTC 時刻を基に計算したユリウス日（JD）を文字列で配信  |
+| `/gmst`          | `std_msgs/String` | グリニッジ恒星時（GMST）を時間形式（hh:mm:ss）で配信  |
+| `/lst`           | `std_msgs/String` | 東京の地方恒星時（LST）を時間形式（hh:mm:ss）で配信   |
 
 ## 実行方法
-### UTC, JD, GMST, LST をまとめて表示する場合
-- 以下のコマンドで実行可能です。
+### UTC、JD、GMST、LST をまとめて表示する場合
+- 以下のコマンドで実行可能です
 ```
 $ ros2 launch mypkg talk_listen.launch.py
 [INFO] [launch]: All log files can be found below /home/moshi/.ros/log/2025-12-24-16-02-37-800976-pR-310738
@@ -49,11 +49,11 @@ $ ros2 launch mypkg talk_listen.launch.py
 [listener-2] LST (Tokyo): 15:31:01.60
 ```
 ### 個別に表示する場合
-- talkerを起動する。
+- talker を起動します
 ```
 $ ros2 run mypkg talker
 ```
-- 別端末で各トピックを確認する。
+- 別端末で各トピックを確認します
 ```
 $ ros2 topic echo /utc_time
 data: '2025-12-24T07:01:36.242501+00:00'
