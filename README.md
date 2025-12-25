@@ -1,8 +1,9 @@
 # UTC 変換 ROS 2 パッケージ
 [![test](https://github.com/mobluebird/mypkg/actions/workflows/test.yml/badge.svg)](https://github.com/mobluebird/mypkg/actions/workflows/test.yml)
-![Python](https://img.shields.io/badge/Python-3.10-blue)
 ![License](https://img.shields.io/badge/License-BSD--3--Clause-green.svg)
-![ROS 2 Humble](https://img.shields.io/badge/ROS2-Humble-orange)
+![Ubuntu 22.04](https://img.shields.io/badge/Ubuntu-22.04-orange)
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![ROS 2 Humble](https://img.shields.io/badge/ROS2-Humble-purple)
 
 本パッケージは、UTC（協定世界時）から **JD（ユリウス日）・GMST（恒星時）・LST（地方恒星時）** を計算し、それぞれ独立した ROS 2 トピックで配信するものです。  
 4つのトピックに分けることで、必要な情報だけを個別に受信可能です。
@@ -31,15 +32,6 @@
 | `/julian_day`    | `std_msgs/String` | ユリウス日（JD）             |
 | `/gmst`          | `std_msgs/String` | 恒星時（GMST）             　|
 | `/lst`           | `std_msgs/String` | 東京の地方恒星時（LST）      |
-
-## リポジトリの使用方法
-ターミナルで以下のコマンドを実行します。
-```
-$ cd ~/ros2_ws/src/
-$ git clone https://github.com/mobluebird/mypkg.git
-$ cd ~/ros2_ws/
-$ colcon build
-```
 
 ## 実行方法
 ### UTC, JD, GMST, LST をまとめて表示する場合
