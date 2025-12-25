@@ -1,9 +1,15 @@
-# mypkg
-ロボットシステム学課題2
+# dev
+[![test](https://github.com/mobluebird/mypkg/actions/workflows/test.yml/badge.svg)](https://github.com/mobluebird/mypkg/actions/workflows/test.yml)
+![Python](https://img.shields.io/badge/Python-3.10-blue)
 ![License](https://img.shields.io/badge/License-BSD--3--Clause-green.svg)
+![ROS 2 Humble](https://img.shields.io/badge/ROS2-Humble-orange)
+
+ロボットシステム学課題2のブランチ
 
 ## テスト環境
-- Ubuntu 24.04 LTS
+- Ubuntu 22.04 LTS
+- Python 3.10
+- ROS 2 Humble
 
 ## 謝辞
 
