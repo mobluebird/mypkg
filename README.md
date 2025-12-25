@@ -92,7 +92,7 @@ data: '15:31:01.51'
 - Web記事・資料
   - [タイムゾーンとは？](https://it-infomation.com/time-zone/)
   - [Julian Day Numbers](https://quasar.as.utexas.edu/BillInfo/JulianDatesG.html)
-  - [NIES Astro Document：Python でユリウス日と恒星時を計算する>例](https://www.nies.ch/doc/astro/sternzeit.en.php)
+  - [Computing siderial time](https://www.nies.ch/doc/astro/sternzeit.en.php)
   - [GMST・恒星時の考え方（計算式の理論参考）](https://zh.wikipedia.org/wiki/恆星時)
   - [恒星時 (Sidereal Time)](https://eco.mtk.nao.ac.jp/koyomi/wiki/B9B1C0B1BBFE.html)
 - 利用・参照したコード
