@@ -51,4 +51,3 @@ def main():
     node.create_timer(1.0, cb)
     rclpy.spin(node)
 
-
