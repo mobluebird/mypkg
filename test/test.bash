@@ -25,6 +25,10 @@ ros2 topic list | grep -q '^/julian_day$'
 ros2 topic list | grep -q '^/gmst$'
 ros2 topic list | grep -q '^/lst$'
 
+# 時間更新確認
+ros2 topic echo /utc_time -n 2 > /tmp/utc2.log
+[ "$(grep -c '^data:' /tmp/utc2.log)" -ge 2 ]
+
 # listener 出力確認
 grep -q '\[listener' /tmp/mypkg.log
 grep -q 'UTC :'  /tmp/mypkg.log
