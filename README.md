@@ -5,7 +5,7 @@
 ![Python 3.10](https://img.shields.io/badge/Python-3.10-F9DC3E?style=flat&logo=python&logoColor=blue)
 ![ROS2 Humble](https://img.shields.io/badge/ROS2-Humble-3399FF?style=flat&logo=ros)
 
-本パッケージは、現在の**UTC（協定世界時）**を取得し、天文時間である**JD（ユリウス日）・GMST（恒星時）・LST（地方恒星時・東京）**の情報を計算してROS 2 トピックで配信します。
+本パッケージは、現在の **UTC（協定世界時）** を取得し、天文時間である **JD（ユリウス日）・GMST（恒星時）・LST（地方恒星時・東京）** の情報を計算して ROS 2 トピックで配信します。  
 各情報は独立したトピックで配信されるため、必要な情報だけを個別に受信することができます。
 
 ## ノードの説明
