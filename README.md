@@ -1,6 +1,6 @@
 # UTC 変換 ROS 2 パッケージ
 [![test](https://github.com/mobluebird/mypkg/actions/workflows/test.yml/badge.svg)](https://github.com/mobluebird/mypkg/actions/workflows/test.yml)
-![Python](https://img.shields.io/badge/Python-3.7--3.14-blue)
+![Python](https://img.shields.io/badge/Python-3.10-blue)
 ![License](https://img.shields.io/badge/License-BSD--3--Clause-green.svg)
 ![ROS 2 Humble](https://img.shields.io/badge/ROS2-Humble-orange)
 
@@ -85,7 +85,7 @@ data: '15:31:01.51'
 
 ## テスト環境
 - Ubuntu 22.04 LTS
-- Python 3.7～3.14
+- Python 3.10
 - ROS 2 Humble
 
 ## 謝辞
