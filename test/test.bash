@@ -25,6 +25,12 @@ ros2 topic list | grep -q '^/julian_day$'
 ros2 topic list | grep -q '^/gmst$'
 ros2 topic list | grep -q '^/lst$'
 
+# topic 型確認
+ros2 topic info /utc_time    | grep -q 'std_msgs/msg/String'
+ros2 topic info /julian_day  | grep -q 'std_msgs/msg/String'
+ros2 topic info /gmst        | grep -q 'std_msgs/msg/String'
+ros2 topic info /lst         | grep -q 'std_msgs/msg/String'
+
 # 時間更新確認
 ros2 topic echo /utc_time -n 2 > /tmp/utc2.log
 [ "$(grep -c '^data:' /tmp/utc2.log)" -ge 2 ]
