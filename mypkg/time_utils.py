@@ -44,3 +44,4 @@ def hours_to_hms(hours: float) -> str:
     m = int((hours - h) * 60)
     s = ((hours - h) * 60 - m) * 60
     return f"{h:02d}:{m:02d}:{s:05.2f}"
+
