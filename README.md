@@ -8,31 +8,6 @@
 本パッケージは、現在の **UTC（協定世界時）** を取得し、天文時間である **JD（ユリウス日）・GMST（恒星時）・LST（地方恒星時・東京）** の情報を計算して ROS 2 トピックで配信します。  
 各情報は独立したトピックで配信されるため、必要な情報だけを個別に受信することができます。
 
-## ノードの説明
-### talker
-- 役割: UTC を取得し、JD・GMST・LST に変換して各トピックにパブリッシュします
-- ノード名: `talker`
-- パブリッシュするトピック: `/utc_time`、`/julian_day`、`/gmst`、`/lst`
-- 更新間隔: 1 秒
-### listener
-- 役割: 各トピックを受信して画面に表示します
-- ノード名: `listener`
-- サブスクライブするトピック: `/utc_time`、`/julian_day`、`/gmst`、`/lst`
-- 表示内容: UTC、JD、GMST、LST（Tokyo）
-
-## Python モジュールの説明
-### time_utils.py
-- 役割: UTC → JD → GMST → LST への計算関数を提供します
-- 利用: `talker` で呼び出されます
-
-## トピックの説明
-| トピック名       | メッセージ型      | 内容                         |
-|------------------|-------------------|------------------------------|
-| `/utc_time`      | `std_msgs/String` | 現在の協定世界時（UTC）を ISO 8601 形式で文字列配信   |
-| `/julian_day`    | `std_msgs/String` | UTC 時刻を基に計算したユリウス日（JD）を文字列で配信  |
-| `/gmst`          | `std_msgs/String` | グリニッジ恒星時（GMST）を時間形式（hh:mm:ss）で配信  |
-| `/lst`           | `std_msgs/String` | 東京の地方恒星時（LST）を時間形式（hh:mm:ss）で配信   |
-
 ## 実行方法
 ### UTC、JD、GMST、LST をまとめて表示する場合
 - 以下のコマンドで実行可能です
@@ -75,6 +50,29 @@ data: '15:31:01.51'
 ---
 ```
 
+## ノードの説明
+### talker
+- 役割: UTC を取得し、JD・GMST・LST に変換して各トピックにパブリッシュします
+- パブリッシュするトピック: `utc_time`、`julian_day`、`gmst`、`lst`
+- 更新間隔: 1 秒
+### listener
+- 役割: 各トピックを受信して画面に表示します
+- サブスクライブするトピック: `utc_time`、`julian_day`、`gmst`、`lst`
+- 表示内容: UTC、JD、GMST、LST（Tokyo）
+
+## トピックの説明
+| トピック名       | メッセージ型      | 内容                         |
+|------------------|-------------------|------------------------------|
+| `utc_time`      | `std_msgs/String` | 現在の協定世界時（UTC）を ISO 8601 形式で文字列配信   |
+| `julian_day`    | `std_msgs/String` | UTC 時刻を基に計算したユリウス日（JD）を文字列で配信  |
+| `gmst`          | `std_msgs/String` | グリニッジ恒星時（GMST）を時間形式（hh:mm:ss）で配信  |
+| `lst`           | `std_msgs/String` | 東京の地方恒星時（LST）を時間形式（hh:mm:ss）で配信   |
+
+## Python モジュールの説明
+### time_utils.py
+- 役割: UTC → JD → GMST → LST への計算関数を提供します
+- 利用: `talker` で呼び出されます
+
 ## テスト環境
 - Ubuntu 22.04 LTS
 - Python 3.10
@@ -88,13 +86,13 @@ data: '15:31:01.51'
   - [GMST・恒星時の考え方（計算式の理論参考）](https://zh.wikipedia.org/wiki/恆星時)
   - [恒星時 (Sidereal Time)](https://eco.mtk.nao.ac.jp/koyomi/wiki/B9B1C0B1BBFE.html)
 - 利用・参照したコード
-  - このパッケージのコードの一部は，下記のスライド（CC-BY-SA 4.0 by Ryuichi Ueda）のものを，本人の許可を得て自身の著作としたものです。
+  - このパッケージのコードの一部は、下記のスライド（CC-BY-SA 4.0 by Ryuichi Ueda）のものを、本人の許可を得て自身の著作としたものです。
     - [ryuichiueda/slides_marp/robosys2025](https://github.com/ryuichiueda/slides_marp/tree/master/robosys2025)
   - 計算ロジックは、下記のコードを参考にしました。
     - [astropy.time — 天文時間操作ライブラリ](https://docs.astropy.org/en/latest/time/) © 2011–2025 The Astropy Developers, BSD-3-Clause license
 
 ## ライセンス
-このソフトウェアパッケージは，3条項BSDライセンスの下，再頒布および使用が許可されます。
+このソフトウェアパッケージは、3条項BSDライセンスの下、再頒布および使用が許可されます。
 
 ## 著作権
 © 2025 Motona Shigehisa
