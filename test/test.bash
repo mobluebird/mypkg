@@ -42,7 +42,7 @@ ros2 topic info /gmst        | grep -q 'std_msgs/msg/String'
 ros2 topic info /lst         | grep -q 'std_msgs/msg/String'
 
 # 時間更新確認
-timeout 3 ros2 topic echo /utc_time > /tmp/utc2.log
+timeout 3 ros2 topic echo /utc_time > /tmp/utc2.log || true
 [ "$(grep -c '^data:' /tmp/utc2.log)" -ge 2 ]
 
 # listener 出力確認
