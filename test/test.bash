@@ -1,8 +1,6 @@
-#!/bin/bash
+#!/bin/bash -e
 # SPDX-FileCopyrightText: 2025 Motona Shigehisa
 # SPDX-License-Identifier: BSD-3-Clause
-
-set -eo pipefail
 
 dir=~
 [ "$1" != "" ] && dir="$1"
