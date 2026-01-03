@@ -9,7 +9,7 @@ dir=~
 
 cd $dir/ros2_ws
 colcon build
-source $dir/.bashrc
+source $dir/ros2_ws/install/setup.bash
 
 # talker 
 timeout 20 ros2 run mypkg talker > /tmp/talker.log 2> /tmp/talker.err &
