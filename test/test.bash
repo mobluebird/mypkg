@@ -2,14 +2,14 @@
 # SPDX-FileCopyrightText: 2025 Motona Shigehisa
 # SPDX-License-Identifier: BSD-3-Clause
 
-set -euo pipefail
+set -eo pipefail
 
 dir=~
 [ "$1" != "" ] && dir="$1"
 
 cd $dir/ros2_ws
 colcon build
-source $dir/ros2_ws/install/setup.bash
+source $dir/.bashrc
 
 # talker 
 timeout 20 ros2 run mypkg talker > /tmp/talker.log 2> /tmp/talker.err &
