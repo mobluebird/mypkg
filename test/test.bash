@@ -53,3 +53,4 @@ grep -q 'LST (Tokyo):' /tmp/mypkg.log
 # 異常終了なし
 ! grep -i 'error' /tmp/mypkg.err
 ! grep -i 'warn'  /tmp/mypkg.err
+
