@@ -13,7 +13,7 @@
 - パブリッシュするトピック: `utc_time`、`julian_day`、`gmst`、`lst`
 - 更新間隔: 1 秒
 ### listener
-- 役割: 各トピックを受信して画面に表示します
+- 役割: 各トピックを受信して画面に表示します（動作確認用）
 - サブスクライブするトピック: `utc_time`、`julian_day`、`gmst`、`lst`
 - 表示内容: UTC、JD、GMST、LST（Tokyo）
 
@@ -26,7 +26,7 @@
 | `lst`           | `std_msgs/String` | 東京の地方恒星時（LST）を時間形式（hh:mm:ss）で配信   |
 
 ## 実行方法
-- talker を起動します
+- `talker` を起動します
 ```
 $ ros2 run mypkg talker
 ```
@@ -53,7 +53,7 @@ data: '15:31:01.51'
 ```
 
 ## 動作確認用
-listener を用いてすべての天文時間情報をまとめて表示することも可能です。
+`listener` を用いると、すべての天文時間情報をまとめてサブスクライブして表示できます。
 ```
 $ ros2 launch mypkg talk_listen.launch.py
 [INFO] [launch]: All log files can be found below /home/moshi/.ros/log/2025-12-24-16-02-37-800976-pR-310738
