@@ -30,7 +30,7 @@
 ```
 $ ros2 run mypkg talker
 ```
-- 別端末で各トピックを確認します
+- 別端末で各トピックの内容を確認します
 ```
 $ ros2 topic echo /utc_time
 data: '2025-12-24T07:01:36.242501+00:00'
@@ -53,7 +53,7 @@ data: '15:31:01.51'
 ```
 
 ## 動作確認用
-`listener` を用いると、すべての天文時間情報をまとめてサブスクライブして表示できます。
+`listener` を用いると、すべての天文時間情報をまとめて表示できます。
 ```
 $ ros2 launch mypkg talk_listen.launch.py
 [INFO] [launch]: All log files can be found below /home/moshi/.ros/log/2025-12-24-16-02-37-800976-pR-310738
